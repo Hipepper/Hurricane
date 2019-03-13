@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:overflow="http://www.w3.org/1999/xhtml">
+<head>
+    <style type="text/css">
+        .showInfos{
+            position: absolute;
+            display: block;
+            width: 218px;
+            height: 280px;
+            cursor: move;
+        }
+        table,table tr th, table tr td { border:1px solid #000000; }
+        table { width: 400px; min-height: 25px; line-height: 25px; text-align: center; border-collapse: collapse;}
+    </style>
+    <meta charset="UTF-8">
+    <title>Hurricanes on the Earth</title>
+</head>
+<body>
+<div class="showInfos" id="drag" style="text-align:center;overflow-y:scroll;width:400px;heigth:200px;"></div>
+<div id="selectarea">
+    <select id="mainSelect" onchange="select()">
+        <option selected="selected">历年飓风轨迹图</option>
+        <option>飓风运动图</option>
+    </select>
+</div>
+<div id="container"></div>
+<div id="picContainer">
+    <canvas id="myCanvas"></canvas>
+</div>
+</body>
+<script src="js/tools/three.js"></script>
+<script src="js/tools/Projector.js"></script>
+<script src="js/tools/SoftwareRenderer.js"></script>
+<script src="js/tools/orbitcontrols.js"></script>
+<script src="js/move.js"></script>
+<script src="js/draw_earth.js"></script>
+<script src="js/drawer.js"></script>
+<script src="js/init.js"></script>
+
+<script>
+    var mainSelect = document.getElementById('mainSelect');
+    var yearSelect = document.getElementById('yearSelect');
+    var nameSelect = document.getElementById('nameSelect');
+    var drag=document.getElementById('drag');
+    function select() {
+        var index = mainSelect.selectedIndex;
+        if (index == 0) {
+            nameSelect.style.display = 'none';
+            yearSelect.style.display = 'inline';
+            drag.style.display='inline';
+            var myCanvas=document.getElementById('myCanvas');
+            draw_year_pic();
+        }
+        else {
+            yearSelect.style.display = 'none';
+            drag.style.display='none';
+            console.log(nameSelect);
+            nameSelect.style.display = 'inline';
+            draw_base_map();
+        }
+    }
+</script>
+</html>
